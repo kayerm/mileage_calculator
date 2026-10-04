@@ -7,10 +7,12 @@ public class Main {
     public static int year = 9999;
     public static Scanner keyboard = new Scanner(System.in);
 
-    static final String RED = "\u001B[31m";
+    public static Month mainMonth;
 
     public static void main(String[] args) {
         introduction();
+        mainMonth = new Month(month, year);
+
         boolean loop = true;
         while (loop) {
             int choiceNum = calculatorPrompts();
@@ -144,6 +146,8 @@ public class Main {
             done = newDay.addPlace(stop);
         } while (!done);
 
+        mainMonth.addDayToMonth(newDay);
+
         System.out.println("================================");
     }
 
@@ -152,7 +156,7 @@ public class Main {
     }
 
     private static void overviewMonth() {  // Case 3
-        System.out.println("Overview the month");
+        System.out.println(mainMonth.toString());
     }
 
     private static void totalMileage() {  // Case 4

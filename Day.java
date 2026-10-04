@@ -66,26 +66,34 @@ public class Day {
                 System.out.printf("%n> %s store added.%n", EMILY_2074);
                 return false;
             case "3736":
+            case "tara":
                 mileageEntries[entryIndex++] = TARA_3736;
                 System.out.printf("%n> %s store added.%n", TARA_3736);
                 return false;
             case "bank":
+            case "hotchner":
                 mileageEntries[entryIndex++] = HOTCHNER_BANK;
                 System.out.printf("%n> %s stop added.%n", HOTCHNER_BANK);
                 return false;
             case "done":
-                System.out.printf("%n> %s entry added: ", date);
-                int index = 0;
-                while (!(mileageEntries[index] == null)) {
-                    System.out.printf("%s ", mileageEntries[index]);
-                    if (mileageEntries[++index] != null) { System.out.print("> "); }
-                }
-                System.out.println("\n");
+                System.out.println(toString());
                 return true;
             default:
                 System.out.println("\n> Unsure about the store, please try again!");
                 return false;
         }
+    }
+
+    @Override
+    public String toString() {
+        String toReturn = "\n> " + date + " entry: ";
+        int index = 0;
+        while (!(mileageEntries[index] == null)) {
+            toReturn += mileageEntries[index] + " ";
+            if (mileageEntries[++index] != null) { toReturn += "> ";}
+        }
+        toReturn += "\n";
+        return toReturn;
     }
 
     //// Calculate the distance between entries 
