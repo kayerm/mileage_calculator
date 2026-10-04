@@ -7,6 +7,8 @@ public class Main {
     public static int year = 9999;
     public static Scanner keyboard = new Scanner(System.in);
 
+    static final String RED = "\u001B[31m";
+
     public static void main(String[] args) {
         introduction();
         boolean loop = true;
@@ -110,6 +112,7 @@ public class Main {
 
         // Read the user's input and clean up
         int choice = keyboard.nextInt();
+        keyboard.nextLine();
         return choice;
     }
 
@@ -117,13 +120,18 @@ public class Main {
         System.out.println("================================");
 
         // Start with adding a date
-        System.out.print("> What is the date: ");
-        String date = keyboard.next();
+
+        String date = "";
+        do {
+            System.out.print("> What is the date: ");
+            date = keyboard.nextLine();
+        } while (date.isEmpty());
         Day newDay = new Day(date);
 
         // Add the stops
+
         boolean done = false;
-        while (!done) {
+        do {
             System.out.println("\n> Type 4983 for Penelope store.");
             System.out.println("> Type 5340 for Jennifer store.");
             System.out.println("> Type 7646 for Spencer store.");
@@ -134,7 +142,7 @@ public class Main {
             System.out.print("> What is your stop? ");
             String stop = keyboard.next();
             done = newDay.addPlace(stop);
-        }
+        } while (!done);
 
         System.out.println("================================");
     }

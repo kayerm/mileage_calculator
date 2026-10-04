@@ -3,17 +3,17 @@ import java.lang.String;
 public class Day {
 
     private String date;
-    private int[] mileageEntries;
+    private String[] mileageEntries;
     private int entryIndex = 0;
 
     private double mileageForDay;
 
-    static final int PENELOPE_4983 = 0;
-    static final int JENNIFER_5340 = 1;
-    static final int SPENCER_7646 = 2;
-    static final int EMILY_2074 = 3;
-    static final int TARA_3736 = 4;
-    static final int HOTCHNER_BANK = 5;
+    static final String PENELOPE_4983 = "Penelope 4983";
+    static final String JENNIFER_5340 = "Jennifer 5340";
+    static final String SPENCER_7646 = "Spencer 7646";
+    static final String EMILY_2074 = "Emily 2074";
+    static final String TARA_3736 = "Tara 7646";
+    static final String HOTCHNER_BANK = "Hotchner Bank";
 
     private double[][] cost = {
         // P0, P1, P2, P3, P4, P5
@@ -30,7 +30,7 @@ public class Day {
     public Day(String date) {
         this.date = date;
         this.mileageForDay = 0; 
-        this.mileageEntries = new int[10];
+        this.mileageEntries = new String[10];
     }
 
     // Setters and getters
@@ -46,25 +46,44 @@ public class Day {
     public boolean addPlace(String stop) {
         switch (stop.toLowerCase()) {
             case "4983":
+            case "penelope":
                 mileageEntries[entryIndex++] = PENELOPE_4983;
+                System.out.printf("%n> %s store added.%n", PENELOPE_4983);
                 return false;
             case "5340":
+            case "jennifer":
                 mileageEntries[entryIndex++] = JENNIFER_5340;
+                System.out.printf("%n> %s store added.%n", JENNIFER_5340);
                 return false;
             case "7646":
+            case "spencer":
                 mileageEntries[entryIndex++] = SPENCER_7646;
+                System.out.printf("%n> %s store added.%n", SPENCER_7646);
                 return false;
             case "2074":
+            case "emily":
                 mileageEntries[entryIndex++] = EMILY_2074;
+                System.out.printf("%n> %s store added.%n", EMILY_2074);
                 return false;
             case "3736":
                 mileageEntries[entryIndex++] = TARA_3736;
+                System.out.printf("%n> %s store added.%n", TARA_3736);
                 return false;
             case "bank":
                 mileageEntries[entryIndex++] = HOTCHNER_BANK;
+                System.out.printf("%n> %s stop added.%n", HOTCHNER_BANK);
+                return false;
+            case "done":
+                System.out.printf("%n> %s entry added: ", date);
+                int index = 0;
+                while (!(mileageEntries[index] == null)) {
+                    System.out.printf("%s ", mileageEntries[index]);
+                    if (mileageEntries[++index] != null) { System.out.print("> "); }
+                }
+                System.out.println("\n");
                 return true;
             default:
-                System.out.println("> Unsure about the store, please try again!");
+                System.out.println("\n> Unsure about the store, please try again!");
                 return false;
         }
     }
