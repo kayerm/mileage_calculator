@@ -41,13 +41,42 @@ public class Month {
         }
     }
 
+    //// Show the overview of days 
+
     public String toString() {
-        String toReturn = "> This is for the month of " + monthName + " year " + year + ": \n";
+        String toReturn = "\n> This is for the month of " + monthName + " year " + year + ": \n";
         for (int i = 0; i < daysIndex; i++) {
             toReturn += days[i].toString();
         }
         toReturn += "\n";
         return toReturn;
+    }
+
+    //// Delete a day to the list 
+    
+    public boolean deleteDay(String dateToDelete) {
+        dateToDelete = dateToDelete.toLowerCase();
+        for (int i = 0; i < daysIndex; i++) {
+            if (days[i].getDate().equals(dateToDelete)) {
+                if (i == 0 && daysIndex > 0) {
+                    deleteDayHelper(i);
+                } else if(i == 0) {
+                    days[i] = null;
+                }
+                else {
+                    deleteDayHelper(i);
+                }
+                daysIndex -= 1;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void deleteDayHelper(int index) {
+        for (int k = index; k < daysIndex; k++) {
+            days[k] = days[k+1];
+        }
     }
 
 }

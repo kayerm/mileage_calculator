@@ -32,6 +32,9 @@ public class Main {
                 case 5: // Export
                     exportFile();
                     break;
+                case 6: // Not a choice but returned by calculatorPrompts for invalid input
+                    System.out.println("\n> Invalid choice, please try again.");
+                    break;
                 default: // Exit
                     loop = false;
                     System.out.println("\nThank you for visiting my Mileage Calculator.\n");
@@ -113,13 +116,18 @@ public class Main {
         System.out.print("Choose an option > ");
 
         // Read the user's input and clean up
-        int choice = keyboard.nextInt();
-        keyboard.nextLine();
-        return choice;
+        if (keyboard.hasNextInt()) {
+            int choice = keyboard.nextInt();
+            keyboard.nextLine();
+            return choice;
+        } else {
+            keyboard.nextLine();
+            return 6;  // Symbolizes invalid return
+        }
     }
 
     private static void addDay() {  // Case 1: Add a day
-        System.out.println("================================");
+        System.out.println("\n================================\n");
 
         // Start with adding a date
 
@@ -153,6 +161,21 @@ public class Main {
 
     private static void deleteDay() {  // Case 2
         System.out.println("Delete a day");
+        System.out.println("================================");
+
+        System.out.println(mainMonth.toString());
+        System.out.print("> Which date would you delete? ");
+        String dateToDelete = keyboard.nextLine();
+
+        boolean deleted = mainMonth.deleteDay(dateToDelete);
+        if (deleted) {
+            System.out.printf("%n> %s was delete from %s %d.%n", dateToDelete, mainMonth.getMonthName(), mainMonth.getYear());
+            System.out.println(mainMonth.toString());
+        } else {
+            System.out.printf("> Unable to delete %s entry from %s %d.%n", dateToDelete, mainMonth.getMonthName(), mainMonth.getYear());
+        }
+
+        System.out.println("================================");
     }
 
     private static void overviewMonth() {  // Case 3
