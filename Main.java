@@ -126,7 +126,7 @@ public class Main {
         }
     }
 
-    private static void addDay() {  // Case 1: Add a day
+    private static void addDay() {  // Case 1 : Add a day
         System.out.println("\n================================\n");
 
         // Start with adding a date
@@ -159,8 +159,7 @@ public class Main {
         System.out.println("================================");
     }
 
-    private static void deleteDay() {  // Case 2
-        System.out.println("Delete a day");
+    private static void deleteDay() {  // Case 2 : Delete a day
         System.out.println("================================");
 
         System.out.println(mainMonth.toString());
@@ -178,8 +177,10 @@ public class Main {
         System.out.println("================================");
     }
 
-    private static void overviewMonth() {  // Case 3
+    private static void overviewMonth() {  // Case 3 : Overview of the month
+        System.out.println("================================");
         System.out.println(mainMonth.toString());
+        System.out.println("================================");
     }
 
     private static void totalMileage() {  // Case 4

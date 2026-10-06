@@ -6,6 +6,9 @@ public class Day {
     private String[] mileageEntries;
     private int entryIndex = 0;
 
+    private int[] numEntries;
+    private int numIndex = 0;
+
     private double mileageForDay;
 
     static final String PENELOPE_4983 = "Penelope 4983";
@@ -14,6 +17,13 @@ public class Day {
     static final String EMILY_2074 = "Emily 2074";
     static final String TARA_3736 = "Tara 7646";
     static final String HOTCHNER_BANK = "Hotchner Bank";
+
+    static final int PENELOPE_4983_NUM = 1;
+    static final int JENNIFER_5340_NUM = 2;
+    static final int SPENCER_7646_NUM = 3;
+    static final int EMILY_2074_NUM = 4;
+    static final int TARA_3736_NUM = 5;
+    static final int HOTCHNER_BANK_NUM = 6;
 
     private double[][] cost = {
         // P0, P1, P2, P3, P4, P5
@@ -31,13 +41,13 @@ public class Day {
         this.date = date;
         this.mileageForDay = 0; 
         this.mileageEntries = new String[10];
+        this.numEntries = new int[10];
     }
 
     // Setters and getters
 
     public void setDate(String date) { this.date = date; }
     public String getDate() { return date; }
-
 
     // Helper methods
 
@@ -48,31 +58,37 @@ public class Day {
             case "4983":
             case "penelope":
                 mileageEntries[entryIndex++] = PENELOPE_4983;
+                numEntries[numIndex++] = PENELOPE_4983_NUM;
                 System.out.printf("%n> %s store added.%n", PENELOPE_4983);
                 return false;
             case "5340":
             case "jennifer":
                 mileageEntries[entryIndex++] = JENNIFER_5340;
+                numEntries[numIndex++] = JENNIFER_5340_NUM;
                 System.out.printf("%n> %s store added.%n", JENNIFER_5340);
                 return false;
             case "7646":
             case "spencer":
                 mileageEntries[entryIndex++] = SPENCER_7646;
+                numEntries[numIndex++] = SPENCER_7646_NUM;
                 System.out.printf("%n> %s store added.%n", SPENCER_7646);
                 return false;
             case "2074":
             case "emily":
                 mileageEntries[entryIndex++] = EMILY_2074;
+                numEntries[numIndex++] = EMILY_2074_NUM;
                 System.out.printf("%n> %s store added.%n", EMILY_2074);
                 return false;
             case "3736":
             case "tara":
                 mileageEntries[entryIndex++] = TARA_3736;
+                numEntries[numIndex++] = TARA_3736_NUM;
                 System.out.printf("%n> %s store added.%n", TARA_3736);
                 return false;
             case "bank":
             case "hotchner":
                 mileageEntries[entryIndex++] = HOTCHNER_BANK;
+                numEntries[numIndex++] = HOTCHNER_BANK_NUM;
                 System.out.printf("%n> %s stop added.%n", HOTCHNER_BANK);
                 return false;
             case "done":
@@ -93,9 +109,30 @@ public class Day {
             if (mileageEntries[++index] != null) { toReturn += "> ";}
         }
         toReturn += "\n";
+        toReturn += "> Total mileage for " + date + " entry: ";
+        
+        toReturn += calculateTotalMileage(this);
+        toReturn += "\n";
         return toReturn;
     }
 
     //// Calculate the distance between entries 
+    
+    public double calculateDistance(int from, int destination) {
+        return cost[from][destination];
+    }
+
+    //// Calculate the distance between all entries
+    
+    public double calculateTotalMileage(Day dayToCalculate) {
+        for (int i = 0; i < numIndex-1; i++) {
+            if (numEntries[i+1] != 0) {
+                mileageForDay += calculateDistance(numEntries[i]-1, numEntries[i+1]-1);
+            } else {
+                return mileageForDay;
+            }
+        }
+        return mileageForDay;
+    }
 
 }
