@@ -73,6 +73,8 @@ public class Month {
         return false;
     }
 
+    //// Move the entry down the list 
+
     public void deleteDayHelper(int index) {
         for (int k = index; k < daysIndex; k++) {
             days[k] = days[k+1];

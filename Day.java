@@ -49,6 +49,8 @@ public class Day {
     public void setDate(String date) { this.date = date; }
     public String getDate() { return date; }
 
+    public double getMileageForDay() { return mileageForDay; }
+
     // Helper methods
 
     //// Add the place to the entries of stores
@@ -57,18 +59,21 @@ public class Day {
         switch (stop.toLowerCase()) {
             case "4983":
             case "penelope":
+            case "isabel":
                 mileageEntries[entryIndex++] = PENELOPE_4983;
                 numEntries[numIndex++] = PENELOPE_4983_NUM;
                 System.out.printf("%n> %s store added.%n", PENELOPE_4983);
                 return false;
             case "5340":
             case "jennifer":
+            case "marion":
                 mileageEntries[entryIndex++] = JENNIFER_5340;
                 numEntries[numIndex++] = JENNIFER_5340_NUM;
                 System.out.printf("%n> %s store added.%n", JENNIFER_5340);
                 return false;
             case "7646":
             case "spencer":
+            case "nairn":
                 mileageEntries[entryIndex++] = SPENCER_7646;
                 numEntries[numIndex++] = SPENCER_7646_NUM;
                 System.out.printf("%n> %s store added.%n", SPENCER_7646);
@@ -109,6 +114,18 @@ public class Day {
             if (mileageEntries[++index] != null) { toReturn += "> ";}
         }
         toReturn += "\n";
+
+        toReturn += "> Distance per location: ";
+        for (int i = 0; i < numIndex-1; i++) {
+            if (numEntries[i+1] != 0) {
+                toReturn += calculateDistance(numEntries[i]-1, numEntries[i+1]-1);
+                if (i != numIndex-2) { toReturn += " > "; }
+            } else {
+                break;
+            }
+        }
+        toReturn += "\n";
+
         toReturn += "> Total mileage for " + date + " entry: ";
         
         toReturn += calculateTotalMileage(this);
